@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: django-channels-app
+    env: docker
+    plan: free
+    buildCommand: ""
+    startCommand: ""
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: myproject1.settings
+      - key: DEBUG
+        value: "True"
+      - key: REDIS_URL
+        fromService:
+          name: django-redis
+          type: redis
+
+  - type: redis
+    name: django-redis
+    ipAllowList: []
